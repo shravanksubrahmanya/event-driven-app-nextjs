@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+"use client";
+
+import React, { useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -131,6 +133,7 @@ export default function SignUp() {
                   </button>
                 </div>
               </div>
+              <div id="clerk-captcha" />
               {error && (
                 <p className="text-red-500 text-sm text-center">{error}</p>
               )}

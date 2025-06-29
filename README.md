@@ -1,8 +1,12 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Todo App with Event-Based Authentication
 
-## Getting Started
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app), demonstrating **event-based authentication** using **Clerk Webhooks**.
 
-First, run the development server:
+---
+
+## 🚀 Getting Started
+
+To run the development server:
 
 ```bash
 npm run dev
@@ -14,23 +18,85 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Features
 
-## Learn More
+- 🧾 **Todo Management** with Create, Read, Update, and Delete operations.
+- 🔐 **Authentication via Clerk**, with custom-built **Sign In** and **Sign Up** pages.
+- 🔁 **Event-based User Sync**: When a user signs up, Clerk triggers a **Webhook**, which registers the user into the **PostgreSQL** database using **Prisma ORM**.
+- 📦 **Database Layer** using [Prisma ORM](https://www.prisma.io/) with PostgreSQL.
+- 🎨 Built using [shadcn/ui](https://ui.shadcn.com/) for elegant and customizable UI components.
+- 🖋️ Font optimized using [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) with [Geist](https://vercel.com/font).
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework**: Next.js 13+ App Router
+- **Authentication**: Clerk (with Webhooks)
+- **ORM**: Prisma
+- **Database**: PostgreSQL
+- **UI**: Tailwind CSS + shadcn/ui
+- **Icons**: Lucide React
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔐 Clerk Integration (Event-Based Auth)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- On user sign-up, Clerk triggers a webhook event `user.created`.
+- A server route listens for this webhook, verifies it using `svix`, and creates a corresponding user record in the database.
+- Example webhook handler: [`app/api/webhooks/route.ts`](./app/api/webhooks/route.ts)
+
+---
+
+## 🖥️ Custom Authentication Pages
+
+- `app/sign-in/page.tsx`: Custom sign-in page with error handling and password toggle.
+- `app/sign-up/page.tsx`: Custom sign-up page with email verification and password toggle.
+
+---
+
+## 🧪 Example Dashboard Usage
+
+After logging in, users are redirected to `/dashboard`, where they can:
+
+- View todos
+- Search and paginate todos
+- Add, edit, or delete todos
+
+---
+
+## 🛠️ Prisma ORM
+
+Prisma is used to interact with the PostgreSQL database:
+
+```bash
+npx prisma generate     # Generate client
+npx prisma migrate dev  # Run migrations
+```
+
+---
+
+## 📦 Learn More
+
+- [Clerk Docs](https://clerk.dev/docs)
+- [Prisma Docs](https://www.prisma.io/docs)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [shadcn/ui Documentation](https://ui.shadcn.com/)
+
+---
+
+## 🚀 Deployment
+
+To deploy this application, we recommend [Vercel](https://vercel.com/), which seamlessly integrates with Next.js.
+
+See: [Next.js Deployment Docs](https://nextjs.org/docs/app/building-your-application/deploying)
+
+---
+
+## 📌 Note
+
+This project is currently **in development**. More features and improvements are planned in the upcoming versions.
